@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 class Cars(models.Model):
     brand = models.CharField(max_length=100, verbose_name="Название")
@@ -10,10 +12,18 @@ class Cars(models.Model):
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="Опубликовано")
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
 
+    def get_absolute_url(self):
+        return reverse('cars_info', kwargs={'info_slug': self.slug})
+
+
+    def __str__(self):
+        return self.brand
+
     class Meta:
         verbose_name = 'Машина'
         verbose_name_plural = 'Машины'
         ordering = ['-published']
+
 
 
 class Category(models.Model):
@@ -22,6 +32,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('cars_category', kwargs={'cars_slug': self.slug})
 
     class Meta:
         verbose_name = 'Категория'

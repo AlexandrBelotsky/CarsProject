@@ -6,4 +6,4 @@ from post.models import Cars
 class FCars(ModelForm):
     class Meta:
         model = Cars
-        fields = ('brand', 'image', 'description', 'price', 'category')
+        fields = ('brand', 'slug', 'image', 'description', 'price', 'category')

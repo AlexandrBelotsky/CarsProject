@@ -8,26 +8,16 @@
 
 {% block content %}
 
-<div>
-    <a href="{% url 'index' %}"><h2>Главная</h2></a>
-    <a href="{% url 'create' %}"><h2>Добавить товар</h2></a>
-    {% for c in cats %}
-        <a href="{% url 'cars_category' c.slug %}"><h2>{{ c.name }}</h2></a>
-    {% endfor %}<br>
-
-</div>
 
 <ul>
     {% for c in cars %}
     <li><h2>{{ c.brand}}</h2></li>
-    {% if c.image %}
-        <img src="{{ c.image.url }}">
-    {% endif %}
+    <img src="{{ c.image.url }}">
     <li><h3>Описание:</h3><p>{{ c.description|truncatechars:5 }}</p></li>
     <li><h3>Цена: {{ c.price}} грн.</h3></li>
     <li>{{ c.update }}</li>
     <li><h3>Опубликовано: </h3>{{ c.published|date:'d.m.Y H:i:s' }}</li>
-    <li><a href="{% url 'cars_info' c.slug %}"><h2>Информация</h2></a></li>
+    <li><a href="{{ c.get_absolute_url }}"><h2>Информация</h2></a></li>
     <hr>
     <br>
     {% endfor %}

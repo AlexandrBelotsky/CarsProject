@@ -4,7 +4,7 @@
 Добавление товара
 {% endblock %}
 {% block content %}
-<a href="{% url 'index' %}"><h2>Главная</h2></a><br>
+
 <h2>Добавление товара</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
